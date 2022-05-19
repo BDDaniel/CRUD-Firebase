@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/CRUD-Firebase/static/css/main.1bd8073a.css",
+    "main.js": "/CRUD-Firebase/static/js/main.59f31d4c.js",
+    "index.html": "/CRUD-Firebase/index.html",
+    "main.1bd8073a.css.map": "/CRUD-Firebase/static/css/main.1bd8073a.css.map",
+    "main.59f31d4c.js.map": "/CRUD-Firebase/static/js/main.59f31d4c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1bd8073a.css",
+    "static/js/main.59f31d4c.js"
+  ]
+}
