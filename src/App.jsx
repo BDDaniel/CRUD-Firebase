@@ -51,7 +51,7 @@ function App() {
     setError(null)
   }
 
-  const eliminarDato = async(id) => {
+  const eliminarDatos = async(id) => {
     try {
       const db = firebase.firestore()
       await db.collection('usuarios').doc(id).delete()
@@ -69,7 +69,7 @@ function App() {
     setId(elemento.id)
   }
 
-  const editarDatos = (e) => {
+  const editarDatos = async(e) => {
     e.preventDefault()
     if (!nombre.trim()) {
       setError('Falta el nombre')
@@ -79,16 +79,23 @@ function App() {
       setError('Falta el apellido')
       return
     }
-    const listaEditada = lista.map(
-      (elemento) => elemento.id === id ? { id: id, nombre: nombre, apellido: apellido } : elemento
-    )
-
-    setLista(listaEditada)
-    setModoEdicion(false)
-    setNombre('')
-    setApellido('')
-    setId('')
-    setError(null)
+    try {
+      const db = firebase.firestore()
+      await db.collection('usuarios').doc(id).update({
+        nombre,apellido
+      })
+      const listaEditada = lista.map(
+        (elemento) => elemento.id === id ? { id: id, nombre: nombre, apellido: apellido } : elemento
+      )
+      setLista(listaEditada)
+      setModoEdicion(false)
+      setNombre('')
+      setApellido('')
+      setId('')
+      setError(null)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -136,7 +143,7 @@ function App() {
                     onClick={() => editar(elemento)}
                   >Editar</button>
                   <button className="btn btn-danger float-end mx-2"
-                    onClick={() => eliminarDato(elemento.id)}
+                    onClick={() => eliminarDatos(elemento.id)}
                   >Eliminar</button>
                 </li>
               )
